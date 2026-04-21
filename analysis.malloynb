@@ -1,0 +1,40 @@
+>>>malloy
+import "contributions.malloy"
+>>>markdown
+# Big Money, Shadow PACs, and Retiree Influence
+
+**I was curious whether** the massive amounts of money flowing into Washington State politics were truly driven by grassroots, individual citizens rallying behind their favorite local candidates. We always hear about candidates boasting about their individual donor counts, but does the math actually support that narrative? 
+
+To investigate, I separated the data. I split "Candidates" from "Political Action Committees (PACs)", and "Individual Humans" from "Corporations/Organizations". Let's start by looking at who is actually receiving the most money.
+>>>malloy
+// Who are the top human politicians receiving money?
+run: contributions -> top_candidates
+>>>markdown
+**And it turns out,** while top candidates like Girmay Zahilay raised a very respectable $1.3 million, they are entirely overshadowed by the PACs and Ballot Committees. 
+
+When I ran the query for PACs, the scale was completely broken. The top PAC brought in nearly **$10 million** alone. This proved that the real financial battles aren't happening between candidates; they are happening in the shadows via Ballot Initiatives and Union/Corporate funds.
+>>>malloy
+// The Shadow Campaigns: Who is really getting the money?
+run: contributions -> top_pacs
+>>>markdown
+**Which led me to also discover** a major surprise about *who* is actually funding this ecosystem. 
+
+Since PACs are dominating, I assumed massive tech corporations were doing all the heavy lifting. And while Organizations like SEIU 775 and Airbnb did drop millions...
+>>>malloy
+run: contributions -> top_organizations
+>>>markdown
+...I was completely shocked when I cleaned the null values out of the occupations data to look at the individual donors. 
+
+I expected to see "Software Engineer" or "Tech Executive" leading the charge in Washington State. Instead, **"RETIRED"** individuals were by far the most powerful human donor bloc, dumping over $7.1 million into the elections—more than triple the next highest active occupation (CEOs).
+>>>malloy
+// The demographic surprise
+run: contributions -> top_occupations
+>>>markdown
+### Conclusion
+If a campaign manager or policy watchdog looks at this notebook, the takeaway is clear: 
+To win in Washington, candidate-to-candidate fundraising is losing its edge. The real power lies in securing corporate/union PAC money or tapping into the massive wealth of retired mega-donors. 
+
+Furthermore, looking at the geography dashboard below, over **$25 million** of this money is coming from *out of state*. Washington's local policies are being heavily subsidized by external, non-working-class wealth.
+>>>malloy
+// Where does the money come from, and what cities are spending the most?
+run: contributions -> geography_dashboard
