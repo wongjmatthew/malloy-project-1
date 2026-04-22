@@ -3,7 +3,8 @@
 ### PREFACE: Reproducing This Dataset
 Due to GitHub’s file size limits for data repositories, the raw dataset used for this analysis is not directly uploaded to this repository. However, you can perfectly recreate my dataset by downloading it directly from the Washington State Public Disclosure Commission (PDC) Open Data Portal. 
 
-**Data Source:** [Washington State PDC - Contributions to Candidates and Political Committees](https://data.wa.gov/Politics/Contributions-to-Candidates-and-Political-Committe/kv7h-kjye/about_data)
+**Data Source:** [Federal Data Catalog - Contributions to Candidates (WA State)](https://catalog.data.gov/dataset/contributions-to-candidates-wa-state)
+*(Note: This dataset is federated from the Washington State PDC Open Data Portal. If the primary wa.gov servers are experiencing firewall/403 restrictions, this federal catalog page provides stable routing to the current endpoints).*
 
 **Filters Applied for Download:**
 To isolate the most relevant data for the 2025 election cycle and eliminate statistical irrelevance, the following filters were applied before exporting:
