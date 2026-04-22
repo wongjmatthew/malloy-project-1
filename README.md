@@ -23,16 +23,16 @@ GitHub does not natively render `.malloynb` files. To run the code and see the i
 ---
 
 ### The Curiosity: Where is the Money Going?
-When we read the news or watch campaign advertisements, the media heavily emphasizes the grassroots nature of state-level politics. Candidates are constantly touting their "small-dollar donations" and framing their campaigns as neighbor-to-neighbor movements. As a data enthusiast, I was deeply curious: does the math actually support this narrative in Washington State? 
+When we read the news or watch campaign advertisements, the media heavily emphasizes the grassroots nature of state-level politics. Candidates are constantly touting their "small-dollar donations" and framing their campaigns as neighbor-to-neighbor movements. As a data enthusiast, I was deeply curious: Does the math actually support this narrative in Washington State? 
 
 If we look at the raw financial receipts of the 2025 election cycle, who is truly bankrolling the elections? Is it the local barista and teacher, or is it a network of mega-donors and out-of-state tech executives? More importantly, when we look at the entities receiving these millions of dollars, are they actually the politicians whose names appear on the ballot, or are they shadow organizations? 
 
 ### The Investigation: Separating Individuals from Groups
 To find the truth, I downloaded the state’s political contribution receipts and loaded them into Malloy. My investigation required a structural dismantling of how the data is traditionally viewed. 
 
-Typically, state dashboards lump all contributions together to show a single "Total Raised" number. Instead, I built a custom Malloy model to strictly separate the data. First, I split the "Filers" (the entities receiving the money) into two groups: actual human **Candidates** and non-human **Political Action Committees (PACs)**. Then, I split the "Donors" into **Individual Humans** and **Organizations/Corporations**. Finally, I cleaned up the demographic data, removing null values and standardizing inputs so I could accurately map out the occupations and geographic origins of the donors.
+Typically, state dashboards lump all contributions into a single "Total Raised" number. Instead, I built a custom Malloy model to separate the data strictly. First, I split the "Filers" (the entities receiving the money) into two groups: actual human **Candidates** and non-human **Political Action Committees (PACs)**. Then, I split the "Donors" into **Individual Humans** and **Organizations/Corporations**. Finally, I cleaned up the demographic data, removing null values and standardizing inputs so I could accurately map out the occupations and geographic origins of the donors.
 
-![Filer Comparison Bar Chart](img/candidates_vs_pacs.png)
+![Filer Comparison Bar Chart](img/candidatesvspacs.png)
 *(Screenshot: A comparison of the top Candidates vs. the top PACs receiving funds)*
 
 ### The Surprises: The Death of the "Candidate"
@@ -41,7 +41,7 @@ As I ran my Malloy queries, the traditional "Candidate vs. Candidate" narrative 
 **Surprise 1: PACs Completely Crush Individual Politicians**
 I expected a high-profile, state-level politician to be the top earner. Unsurprisingly, the top candidate filer in the state—Girmay Zahilay—raised an impressive $1.33 million. However, that pales in comparison to the PACs. The *SEIU 775 Ballot Fund* pulled in a staggering **$9.6 million**, and Airbnb's *HOST PAC* brought in nearly **$4 million**. The top 5 PACs alone raised over $22 million, vastly out-earning the actual human beings running for office. The real financial battles aren't happening between candidates; they are happening in the shadows via Ballot Initiatives.
 
-![Mega Donors Chart](img/human_vs_org_donors.png)
+![Mega Donors Chart](img/humanvsorgdonors.png)
 *(Screenshot: Top Individual Mega-Donors vs Organizational Donors)*
 
 **Surprise 2: The Mega-Donor Reality**
@@ -50,7 +50,7 @@ Looking at the donors, I expected to see a massive volume of everyday citizens. 
 **Surprise 3: "Retired" is the Ultimate Occupation**
 By cleaning the occupation data, a massive demographic truth emerged. I assumed tech moguls or lawyers would be the top donors. Instead, **"RETIRED"** individuals contributed over **$7.1 million** to political campaigns. The next closest active occupation was "CEO" at $2.3 million. The non-working class is outspending the working class by a ratio of 3-to-1.
 
-![Occupations Chart](img/top_occupations.png)
+![Occupations Chart](img/topoccupations.png)
 *(Screenshot: The overwhelming financial dominance of Retired donors)*
 
 **Surprise 4: Out-of-State Influence**
