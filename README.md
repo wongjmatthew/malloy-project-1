@@ -11,6 +11,7 @@ To isolate the most relevant data for the 2025 election cycle and eliminate stat
 2. **Amount:** Filtered for contributions `>= $10.00`. (Contributions under ten dollars were excluded because they overwhelmingly consisted of bank interest accruals, testing transactions, and other irrelevant data points).
 
 While the original data was downloaded as a CSV, I wrote a Python script to natively clean the financial columns and convert the dataset into an **Apache Parquet** file. This highly compressed, column-oriented format drastically reduced the file size and heavily optimized query speeds when running Malloy and DuckDB.
+
 ---
 
 ### The Curiosity: Is Politics Still Local?
