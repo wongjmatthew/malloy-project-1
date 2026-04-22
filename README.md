@@ -8,7 +8,7 @@ Due to GitHub’s file size limits for data repositories, the raw dataset used f
 **Filters Applied for Download:**
 To isolate the most relevant data for the 2025 election cycle and eliminate statistical noise, the following filters were applied before exporting:
 1. **Date Range:** Filtered for receipt dates between `2024` and `2026` to capture early and late reporting for the `2025` election year.
-2. **Amount:** Filtered for contributions `> $10.00`. (Contributions under ten dollars were excluded because they overwhelmingly consisted of bank interest accruals, testing transactions, and other irrelevant data points).
+2. **Amount:** Filtered for contributions `>= $10.00`. (Contributions under ten dollars were excluded because they overwhelmingly consisted of bank interest accruals, testing transactions, and other irrelevant data points).
 
 ---
 
@@ -17,7 +17,7 @@ When we read the news or watch campaign advertisements, the media heavily emphas
 
 If we look at the raw financial receipts of the 2025 election cycle, who is truly bankrolling the elections? Is it the local barista and teacher, or is it a network of mega-donors and out-of-state tech executives? More importantly, when we look at the entities receiving these millions of dollars, are they actually the politicians whose names appear on the ballot, or are they shadow organizations? 
 
-### The Investigation: Separating Humans from Machines
+### The Investigation: Separating Individuals from Groups
 To find the truth, I downloaded the state’s political contribution receipts and loaded them into Malloy. My investigation required a structural dismantling of how the data is traditionally viewed. 
 
 Typically, state dashboards lump all contributions together to show a single "Total Raised" number. Instead, I built a custom Malloy model to strictly separate the data. First, I split the "Filers" (the entities receiving the money) into two groups: actual human **Candidates** and non-human **Political Action Committees (PACs)**. Then, I split the "Donors" into **Individual Humans** and **Organizations/Corporations**. Finally, I cleaned up the demographic data, removing null values and standardizing inputs so I could accurately map out the occupations and geographic origins of the donors.
