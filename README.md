@@ -10,7 +10,14 @@ To isolate the most relevant data for the 2025 election cycle and eliminate stat
 1. **Date Range:** Filtered for receipt dates between `2024` and `2026` to capture early and late reporting for the `2025` election year.
 2. **Amount:** Filtered for contributions `>= $10.00`. (Contributions under ten dollars were excluded because they overwhelmingly consisted of bank interest accruals, testing transactions, and other irrelevant data points).
 
-While the original data was downloaded as a CSV, I wrote a Python script to natively clean the financial columns and convert the dataset into an **Apache Parquet** file. This highly compressed, column-oriented format drastically reduced the file size and heavily optimized query speeds when running Malloy and DuckDB.
+(While the original data was downloaded as a CSV, I wrote a Python script to natively clean the financial columns and convert the dataset into an **Apache Parquet** file. This highly compressed, column-oriented format drastically reduced the file size and heavily optimized query speeds when running Malloy and DuckDB.)
+
+**How to view the interactive notebook:**
+GitHub does not natively render `.malloynb` files. To run the code and see the interactive charts yourself:
+1. Clone this repository.
+2. Open the folder in Visual Studio Code.
+3. Ensure you have the official Google Malloy extension installed.
+4. Open `analysis.malloynb` and click "Run" on the code blocks!
 
 ---
 
