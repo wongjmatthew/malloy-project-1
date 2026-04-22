@@ -1,23 +1,19 @@
-source: contributions is duckdb.table('contributions.csv') extend {
+source: contributions is duckdb.table('contributions.parquet') extend {
   
   // --- DIMENSIONS ---
   dimension: 
-    amount_num is replace(replace(amount, '$', ''), ',', '')::number,
     is_out_of_state is (contributor_state != 'WA'),
     city_clean is upper(contributor_city),
     jurisdiction_clean is upper(jurisdiction),
     position_clean is upper(position),
-    // Standardize occupations to uppercase so "Retired" and "RETIRED" combine correctly
     occupation_clean is upper(contributor_occupation)
 
   // --- MEASURES ---
   measure: 
-    total_amount is sum(amount_num)
-    avg_amount is avg(amount_num)
+    // Notice we can now use 'amount' directly because we cleaned it in Python!
+    total_amount is sum(amount)
 
   // --- VIEWS: THE FILERS (Who gets the money) ---
-  
-  // Top Candidate Filers (Actual Politicians)
   # bar_chart
   view: top_candidates is {
     where: type = 'Candidate'
@@ -27,7 +23,6 @@ source: contributions is duckdb.table('contributions.csv') extend {
     limit: 10
   }
 
-  // Top PACs / Committees (The Shadow Funds)
   # bar_chart
   view: top_pacs is {
     where: type = 'Political Committee'
@@ -38,9 +33,6 @@ source: contributions is duckdb.table('contributions.csv') extend {
   }
 
   // --- VIEWS: THE DONORS (Who gives the money) ---
-
-  // Top Individual Donors (Real People)
-  // Note: PDC sometimes lists "Small Contributions" here, but the rest are ultra-wealthy individuals
   # bar_chart
   view: top_individuals is {
     where: contributor_category = 'Individual'
@@ -50,7 +42,6 @@ source: contributions is duckdb.table('contributions.csv') extend {
     limit: 10
   }
 
-  // Top Organizational Donors (Corporations & Unions)
   # bar_chart
   view: top_organizations is {
     where: contributor_category = 'Organization'
@@ -61,12 +52,9 @@ source: contributions is duckdb.table('contributions.csv') extend {
   }
 
   // --- VIEWS: DEMOGRAPHICS & GEOGRAPHY ---
-
-  // Top Occupations (Cleaned of nulls and blanks)
   # bar_chart
   view: top_occupations is {
     group_by: occupation_clean
-    // This removes the ∅ symbol and blank entries
     where: occupation_clean is not null and occupation_clean != '' 
     aggregate: total_amount
     order_by: total_amount desc
@@ -102,108 +90,5 @@ source: contributions is duckdb.table('contributions.csv') extend {
     aggregate: total_amount
     order_by: total_amount desc
     limit: 10
-  }
-
-  // --- INSIGHTFUL ANALYSES ---
-
-  // In-State vs Out-of-State Money Flow
-  # pie_chart
-  view: in_state_vs_out_of_state is {
-    group_by: is_out_of_state
-    aggregate: total_amount
-    where: is_out_of_state is not null
-  }
-
-  // Average Donation Size by Contributor Type
-  # bar_chart
-  view: avg_donation_by_type is {
-    group_by: contributor_category
-    aggregate: 
-      total_amount
-      avg_donation is avg(amount_num)
-    order_by: avg_donation desc
-  }
-
-  // Top Donors Who Gave Multiple Times (Repeat Contributors)
-  # bar_chart
-  view: repeat_donors is {
-    where: contributor_category = 'Individual'
-    group_by: contributor_name
-    aggregate: 
-      total_amount
-      donation_count is count()
-    order_by: donation_count desc
-    limit: 15
-  }
-
-  // Donation Size Distribution (Bucketed)
-  # bar_chart
-  view: donation_size_buckets is {
-    group_by: donation_size is floor(amount_num / 100) * 100
-    aggregate: total_amount
-    where: amount_num > 0
-    order_by: donation_size
-  }
-
-  // Top Occupations for Individual Donors (Who are the big givers?)
-  # bar_chart
-  view: top_individual_occupations is {
-    where: contributor_category = 'Individual' and occupation_clean is not null and occupation_clean != ''
-    group_by: occupation_clean
-    aggregate: 
-      total_amount
-      donor_count is count(contributor_name)
-    order_by: total_amount desc
-    limit: 12
-  }
-
-  // Candidates: Total Money vs Number of Donations (Efficiency)
-  # scatter
-  view: candidate_donation_efficiency is {
-    where: type = 'Candidate'
-    group_by: filer_name
-    aggregate: 
-      total_amount
-      donation_count is count()
-      avg_donation is avg(amount_num)
-    order_by: total_amount desc
-    limit: 20
-  }
-
-  // Party Breakdown with Donation Counts
-  # bar_chart
-  view: party_donation_details is {
-    group_by: party
-    aggregate: 
-      total_amount
-      donation_count is count()
-      avg_donation is avg(amount_num)
-    where: party is not null and party != ''
-    order_by: total_amount desc
-  }
-
-  // Top Out-of-State Donors (Who from other states is influencing WA politics?)
-  # bar_chart
-  view: top_out_of_state_donors is {
-    where: is_out_of_state = true
-    group_by: contributor_name
-    aggregate: total_amount
-    order_by: total_amount desc
-    limit: 15
-  }
-
-  // Largest Single Donations
-  # table
-  view: largest_donations is {
-    group_by: 
-      contributor_name
-      contributor_category
-      filer_name
-      occupation_clean
-      contributor_city
-      contributor_state
-    aggregate: max_donation is max(amount_num)
-    order_by: max_donation desc
-    limit: 20
   }
 }
