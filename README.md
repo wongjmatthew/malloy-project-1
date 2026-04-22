@@ -5,7 +5,6 @@ Due to GitHub’s file size limits for data repositories, the raw dataset used f
 
 **Data Source:** 1. Go to the [Washington State PDC Open Data Portal](https://www.pdc.wa.gov/political-disclosure-reporting-data/open-data).
 2. Scroll down to the "Open Data" table and select the dataset titled: **Contributions to Candidates and Political Committees**.
-*(Note: This dataset is federated from the Washington State PDC Open Data Portal. If the primary wa.gov servers are experiencing firewall/403 restrictions, [this federal catalog page](https://data.wa.gov/browse?category=Politics&sortBy=last_modified&utf8=%E2%9C%93&provenance=official&page=1&pageSize=20) provides stable routing to the current endpoints).*
 
 **Filters Applied for Download:**
 To isolate the most relevant data for the 2025 election cycle and eliminate statistical irrelevance, the following filters were applied before exporting:
