@@ -1,6 +1,6 @@
 # The Shadow Campaigns: Dissecting the 2025 Financial Battleground of Washington State Politics
 
-### 🛑 PREFACE: Reproducing This Dataset
+### PREFACE: Reproducing This Dataset
 Due to GitHub’s file size limits for data repositories, the raw dataset used for this analysis is not directly uploaded to this repository. However, you can perfectly recreate my dataset by downloading it directly from the Washington State Public Disclosure Commission (PDC) Open Data Portal. 
 
 **Data Source:** [Washington State PDC - Contributions to Candidates and Political Committees](https://data.wa.gov/Politics/Contributions-to-Candidates-and-Political-Committe/kv7h-kjye)
