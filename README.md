@@ -56,7 +56,7 @@ By cleaning the occupation data, a massive demographic truth emerged. I assumed 
 **Surprise 4: Out-of-State Influence**
 Finally, looking at the geography of these donations, I was surprised to see that Washington’s local elections are viewed as a national battleground. Over **$25 million** of the total funds came from donors residing entirely outside of Washington state, heavily clustered in California and Washington D.C.
 
-![Occupations Chart](img/out of state.png)
+![Occupations Chart](img/outofstate.png)
 *(Screenshot: The comparison of In-State vs. Out-of-State funding)*
 
 ### So What? (Conclusion & Impact)
